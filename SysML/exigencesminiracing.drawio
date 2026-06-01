@@ -1,0 +1,184 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0" version="24.8.6">
+  <diagram name="Page-1" id="WZSTD5dyhv6bsI2Er-Zs">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-1" value="&lt;strong&gt;Banc d&#39;essai instrumenté&lt;br&gt;&lt;/strong&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=50;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="560" width="288.75" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-5" value="Instrumenter un banc d&#39;essai pour voiture RC&#xa;Automatisation des mesures de performances&#xa;Identification des voitures&#xa;Sauvegarde et affichage des résultats&#xa;" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=0;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-1">
+          <mxGeometry x="8.75" y="65" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-10" value="&lt;strong&gt;Identification des voitures&lt;br&gt;&lt;/strong&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=50;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="371.25" y="590" width="258.75" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-11" value="Identification des voitures par &#xa;identifiant unique&#xa;" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-10">
+          <mxGeometry x="8.75" y="65" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-17" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="371.25" y="740" width="312.5" height="113" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-12" value="&lt;strong style=&quot;box-sizing: unset; color: rgba(0, 0, 0, 0.87); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Helvetica, Arial, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; font-size: 14px; text-align: left; background-color: rgb(255, 255, 255);&quot;&gt;Serveur de données&lt;/strong&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=50;labelBackgroundColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-17">
+          <mxGeometry width="312.5" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-16" value="Serveur permettant le stockage des données&#xa;&#xa;" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-17">
+          <mxGeometry x="30" y="73" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-19" value="&lt;strong style=&quot;box-sizing: unset; color: rgba(0, 0, 0, 0.87); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Helvetica, Arial, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; font-size: 14px; text-align: left; background-color: rgb(255, 255, 255);&quot;&gt;Affichage des données&lt;/strong&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=50;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="371.25" y="870" width="312.5" height="110.00194690265494" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-20" value="Interface web, page HTML permettant l&#39;affichage&#xa; de données ou graph compatible smartphone&#xa;Affichage local sur écran tactile&#xa;" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-19">
+          <mxGeometry x="20" y="50.001946902654936" width="290" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="460" as="targetPoint" />
+            <mxPoint x="710" y="350" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="662" y="350" />
+              <mxPoint x="662" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-22" value="Les capteurs" style="swimlane;startSize=50;labelBackgroundColor=none;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="711.25" y="270" width="248.75" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-23" value="Capteur de vitesse 30000 rpm max&#xa;Capteur de tension 12V max&#xa;Capteur de courant 30A max&#xa;" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-22">
+          <mxGeometry x="10" y="60" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-24" value="Alimentation secteur de la partie instrumentée" style="swimlane;startSize=50;labelBackgroundColor=none;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="371.25" y="1000" width="288.75" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-25" value="Dimensionnement d&#39;une alimentation AC/DC&#xa;pour alimenter l&#39;instrumentation et l&#39;affichage&#xa;" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-24">
+          <mxGeometry x="11.25" y="70" width="270" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="ReYouQA34ijQaN8Hb9lq-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="681.25" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-26" value="OS, Web" style="swimlane;startSize=50;labelBackgroundColor=none;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="721.25" y="740" width="351.25" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-27" value="OS: serveur Ubuntu 24.0&#xa;Serveur Apache2: permet l&#39;hebergement des page html&#xa;Création de graph: Grafana&#xa;Base de données: serveur PHP et MYSQL&#xa;Serveur Lora: ChirpStack" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-26">
+          <mxGeometry x="11.25" y="45" width="320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="ReYouQA34ijQaN8Hb9lq-28" target="ReYouQA34ijQaN8Hb9lq-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1270" y="930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-28" value="Performance" style="swimlane;startSize=50;labelBackgroundColor=none;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="740" width="351.25" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-29" value="Sécurisation par mot de passe&#xa;&#xa;Données mémorisées sur un mois affichage en tableau" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-28">
+          <mxGeometry x="11.25" y="60" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1.006;entryY=0.445;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ReYouQA34ijQaN8Hb9lq-32" target="ReYouQA34ijQaN8Hb9lq-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="742.97" y="853" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-32" value="Performance" style="swimlane;startSize=50;labelBackgroundColor=none;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="719.97" y="903" width="173" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-33" value="Affichage &#xa;vitesse &#xa;accélération&#xa;Couple&#xa;Charge batterie&#xa;" style="text;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-32">
+          <mxGeometry x="15.629999999999999" y="55" width="110" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-31" value="" style="edgeStyle=none;html=1;startArrow=sysMLPackCont;startSize=12;endArrow=none;rounded=0;exitX=1.014;exitY=0.461;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="258.75000000000006" y="657.2700000000001" as="sourcePoint" />
+            <mxPoint x="370" y="657" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-32" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="1080" as="sourcePoint" />
+            <mxPoint x="320" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-33" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="480" as="sourcePoint" />
+            <mxPoint x="371.25" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-34" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="820" as="sourcePoint" />
+            <mxPoint x="371.25" y="819.58" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-35" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="950" as="sourcePoint" />
+            <mxPoint x="371.25" y="950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-36" value="" style="fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="430" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-37" value="&amp;lt;&amp;lt;testCase&amp;gt;&amp;gt;" style="html=1;align=center;spacing=0;verticalAlign=middle;strokeColor=none;fillColor=none;whiteSpace=wrap;spacingTop=3;" vertex="1" parent="ispdJ7PYFWkWbFBiD3Gw-36">
+          <mxGeometry width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-38" value="Calculs" style="html=1;align=center;spacing=0;verticalAlign=middle;strokeColor=none;fillColor=none;whiteSpace=wrap;fontStyle=1" vertex="1" parent="ispdJ7PYFWkWbFBiD3Gw-36">
+          <mxGeometry y="16" width="200" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-39" value="" style="line;strokeWidth=0.25;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="ispdJ7PYFWkWbFBiD3Gw-36">
+          <mxGeometry y="34" width="200" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-40" value="&lt;div&gt;Calcul du couple moteur à partir de la puissance et de la vitesse&lt;/div&gt;&lt;div&gt;Calcul du taux de charge batterie&lt;br&gt;&lt;/div&gt;" style="html=1;align=center;spacing=0;verticalAlign=middle;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="ispdJ7PYFWkWbFBiD3Gw-36">
+          <mxGeometry y="42" width="200" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="ispdJ7PYFWkWbFBiD3Gw-40">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="500" as="targetPoint" />
+            <mxPoint x="751.1000000000001" y="490.002" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="720" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-7" value="&lt;strong&gt;Mesures automatiques&lt;br&gt;&lt;/strong&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=50;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="380" y="390" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ReYouQA34ijQaN8Hb9lq-9" value="&lt;div&gt;Vitesse de rotation&lt;/div&gt;&lt;div&gt;Tension moteur&lt;/div&gt;&lt;div&gt;Courant moteur et batterie&lt;/div&gt;&lt;div&gt;Calcul du couple&lt;/div&gt;&lt;div&gt;Calcul du taux de charge batterie&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="ReYouQA34ijQaN8Hb9lq-7">
+          <mxGeometry x="22.5" y="55" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-45" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="1080" as="sourcePoint" />
+            <mxPoint x="371.25" y="1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-54" value="" style="fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="590" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-55" value="&amp;lt;&amp;lt;testCase&amp;gt;&amp;gt;" style="html=1;align=center;spacing=0;verticalAlign=middle;strokeColor=none;fillColor=none;whiteSpace=wrap;spacingTop=3;" vertex="1" parent="ispdJ7PYFWkWbFBiD3Gw-54">
+          <mxGeometry width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-56" value="Protocole" style="html=1;align=center;spacing=0;verticalAlign=middle;strokeColor=none;fillColor=none;whiteSpace=wrap;fontStyle=1" vertex="1" parent="ispdJ7PYFWkWbFBiD3Gw-54">
+          <mxGeometry y="16" width="200" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-57" value="" style="line;strokeWidth=0.25;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="ispdJ7PYFWkWbFBiD3Gw-54">
+          <mxGeometry y="34" width="200" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-58" value="&lt;div&gt;Identification par puce et lecteur RFID&lt;/div&gt;&lt;div&gt;Protocole Mifare 13,56MHz &lt;br&gt;&lt;/div&gt;&lt;div&gt;Lecture seule&lt;br&gt;&lt;/div&gt;" style="html=1;align=center;spacing=0;verticalAlign=middle;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="ispdJ7PYFWkWbFBiD3Gw-54">
+          <mxGeometry y="42" width="200" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="ispdJ7PYFWkWbFBiD3Gw-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="630" y="680" as="targetPoint" />
+            <mxPoint x="720" y="648.03" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="720" y="650" />
+              <mxPoint x="670" y="650" />
+              <mxPoint x="670" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

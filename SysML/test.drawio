@@ -1,0 +1,133 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0" version="24.8.6">
+  <diagram name="Page-1" id="929967ad-93f9-6ef4-fab6-5d389245f69c">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" style=";html=1;" />
+        <mxCell id="1" style=";html=1;" parent="0" />
+        <mxCell id="1672d66443f91eb5-23" value="Title" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="120" y="40" width="1510" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-1" value="Banc d&#39;essai instrumenté" style="shape=rect;html=1;verticalAlign=top;fontStyle=1;whiteSpace=wrap;align=center;" vertex="1" parent="1">
+          <mxGeometry x="400" y="190" width="1180" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-2" value="Capteur de vitesse" style="html=1;shape=mxgraph.sysml.port1;fontStyle=1;whiteSpace=wrap;align=center;points=[[0,0.5,0],[1,0.5,0]];fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="550" y="320" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-3" value="p1" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;shape=rect;points=[[0,0.5,0]];html=1;resizable=1;align=right;verticalAlign=bottom;labelPosition=left;verticalLabelPosition=top;labelBackgroundColor=none;fontSize=10;part=1;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-2">
+          <mxGeometry y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-4" value="p2" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;shape=rect;points=[[1,0.5,0]];html=1;resizable=1;labelBackgroundColor=none;fontSize=10;part=1;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-2">
+          <mxGeometry x="140" y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-22" value="" style="html=1;shape=mxgraph.sysml.port;sysMLPortType=flowN;rotation=90;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-2">
+          <mxGeometry y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-23" value="" style="html=1;shape=mxgraph.sysml.port;sysMLPortType=flowN;rotation=90;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-2">
+          <mxGeometry x="140" y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-8" value="Transmission" style="html=1;shape=mxgraph.sysml.port1;fontStyle=1;whiteSpace=wrap;align=center;points=[[0,0.5,0],[1,0.5,0]];" vertex="1" parent="1">
+          <mxGeometry x="1280" y="340" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-9" value="p1" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;shape=rect;points=[[0,0.5,0]];html=1;resizable=1;align=right;verticalAlign=bottom;labelPosition=left;verticalLabelPosition=top;labelBackgroundColor=none;fontSize=10;part=1;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-8">
+          <mxGeometry y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-10" value="p2" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;shape=rect;points=[[1,0.5,0]];html=1;resizable=1;labelBackgroundColor=none;fontSize=10;part=1;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-8">
+          <mxGeometry x="140" y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-13" value="Alimentation" style="html=1;shape=mxgraph.sysml.itemFlow;fontStyle=1;flowDir=n;flowType=in;whiteSpace=wrap;align=center;" vertex="1" parent="1">
+          <mxGeometry x="890" y="820" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-14" value="" style="html=1;shape=mxgraph.sysml.port;sysMLPortType=flowN;" vertex="1" parent="1">
+          <mxGeometry x="980" y="820" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-15" value="Capteur de tension" style="html=1;shape=mxgraph.sysml.port1;fontStyle=1;whiteSpace=wrap;align=center;points=[[0,0.5,0],[1,0.5,0]];fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="550" y="410" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-16" value="p1" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;shape=rect;points=[[0,0.5,0]];html=1;resizable=1;align=right;verticalAlign=bottom;labelPosition=left;verticalLabelPosition=top;labelBackgroundColor=none;fontSize=10;part=1;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-15">
+          <mxGeometry y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-17" value="p2" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;shape=rect;points=[[1,0.5,0]];html=1;resizable=1;labelBackgroundColor=none;fontSize=10;part=1;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-15">
+          <mxGeometry x="140" y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-18" value="Capteur de courant" style="html=1;shape=mxgraph.sysml.port1;fontStyle=1;whiteSpace=wrap;align=center;points=[[0,0.5,0],[1,0.5,0]];fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="550" y="500" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-19" value="p1" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;shape=rect;points=[[0,0.5,0]];html=1;resizable=1;align=right;verticalAlign=bottom;labelPosition=left;verticalLabelPosition=top;labelBackgroundColor=none;fontSize=10;part=1;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-18">
+          <mxGeometry y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-20" value="p2" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;shape=rect;points=[[1,0.5,0]];html=1;resizable=1;labelBackgroundColor=none;fontSize=10;part=1;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-18">
+          <mxGeometry x="140" y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-21" value="" style="html=1;shape=mxgraph.sysml.port;sysMLPortType=flowN;rotation=90;" vertex="1" parent="1">
+          <mxGeometry x="400" y="340" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-24" value="" style="edgeStyle=none;html=1;endArrow=none;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Zer-Vwf74CBEmibFYaLP-21" target="Zer-Vwf74CBEmibFYaLP-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="720" y="500" as="sourcePoint" />
+            <mxPoint x="880" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Zer-Vwf74CBEmibFYaLP-29" target="Zer-Vwf74CBEmibFYaLP-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-25" value="&lt;b&gt;Acquisition Traitement&lt;br&gt;&lt;/b&gt;" style="whiteSpace=wrap;align=center;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="820" y="340" width="230" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-26" value="port1" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=flowS;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="50" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-27" value="port2" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=empty;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-70" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-28" value="port3" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=flowE;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-10" y="30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-29" value="" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=doubleH;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry y="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-40" y="50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-30" value="port5" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=flowE;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-10" y="30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-31" value="port6" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=doubleH;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry x="1" y="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-10" y="-50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-32" value="port7" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=flowN;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry y="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="50" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-33" value="port8" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=doubleV;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry x="1" y="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-70" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-36" value="" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=flowE;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;" vertex="1" parent="Zer-Vwf74CBEmibFYaLP-25">
+          <mxGeometry x="-10" y="75" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-34" value="port4" style="html=1;shape=mxgraph.sysml.port;html=1;resizable=0;sysMLPortType=doubleH;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="910" y="590" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zer-Vwf74CBEmibFYaLP-37" value="" style="edgeStyle=none;html=1;endArrow=none;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Zer-Vwf74CBEmibFYaLP-23" target="Zer-Vwf74CBEmibFYaLP-28">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="720" y="500" as="sourcePoint" />
+            <mxPoint x="880" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
