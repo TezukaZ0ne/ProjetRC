@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{margin:0;background:#ece9e0;font-family:'Courier New',monospace}
+  .tabs{display:flex;gap:0;margin:10px 10px 0}
+  .tab{padding:6px 18px;background:#ccc;border:1px solid #888;border-bottom:none;cursor:pointer;font-family:'Courier New',monospace;font-size:12px;color:#333}
+  .tab.active{background:#fff;border-bottom:1px solid #fff;color:#000;font-weight:bold}
+  .pg{display:none}
+  .pg.active{display:block}
+  .page{background:#fff;border:2px solid #222;margin:0 10px 10px;overflow:hidden}
+  svg text{font-family:'Courier New',monospace}
+</style>
+</head>
+<body>
+<div class="tabs">
+  <div class="tab active" onclick="show(0)">PAGE 1 — Alimentation</div>
+  <div class="tab" onclick="show(1)">PAGE 2 — Connexions modules</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PAGE 1 : ALIMENTATION                          -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="pg active" id="p0">
+<div class="page" style="width:940px;height:660px">
+<svg width="940" height="660" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse">
+    <circle cx="15" cy="15" r="0.8" fill="#ccc"/>
+  </pattern>
+</defs>
+<rect width="940" height="660" fill="url(#g)"/>
+<rect width="940" height="660" fill="none" stroke="#222" stroke-width="2"/>
+<line x1="0" y1="30" x2="940" y2="30" stroke="#bbb" stroke-width="0.5"/>
+<line x1="0" y1="628" x2="940" y2="628" stroke="#bbb" stroke-width="0.5"/>
+<line x1="30" y1="0" x2="30" y2="660" stroke="#bbb" stroke-width="0.5"/>
+<line x1="910" y1="0" x2="910" y2="660" stroke="#bbb" stroke-width="0.5"/>
+<!-- repères colonnes -->
+<text x="115" y="19" font-size="9" text-anchor="middle" fill="#aaa">B</text>
+<text x="202" y="19" font-size="9" text-anchor="middle" fill="#aaa">C</text>
+<text x="289" y="19" font-size="9" text-anchor="middle" fill="#aaa">D</text>
+<text x="376" y="19" font-size="9" text-anchor="middle" fill="#aaa">E</text>
+<text x="463" y="19" font-size="9" text-anchor="middle" fill="#aaa">F</text>
+<text x="550" y="19" font-size="9" text-anchor="middle" fill="#aaa">G</text>
+<text x="637" y="19" font-size="9" text-anchor="middle" fill="#aaa">H</text>
+<text x="724" y="19" font-size="9" text-anchor="middle" fill="#aaa">J</text>
+<text x="811" y="19" font-size="9" text-anchor="middle" fill="#aaa">K</text>
+<text x="18" y="100" font-size="8" text-anchor="middle" fill="#aaa">1</text>
+<text x="18" y="195" font-size="8" text-anchor="middle" fill="#aaa">2</text>
+<text x="18" y="290" font-size="8" text-anchor="middle" fill="#aaa">3</text>
+<text x="18" y="385" font-size="8" text-anchor="middle" fill="#aaa">4</text>
+<text x="18" y="480" font-size="8" text-anchor="middle" fill="#aaa">5</text>
+<text x="18" y="560" font-size="8" text-anchor="middle" fill="#aaa">6</text>
+
+<!-- ════ 12V INPUT CONN ════ -->
+<text x="55" y="292" font-size="9" font-weight="bold" fill="#000">12V INPUT</text>
+<text x="55" y="303" font-size="7" fill="#555">CONN-SIL2</text>
+<rect x="55" y="307" width="38" height="26" fill="white" stroke="#000" stroke-width="1.5"/>
+<circle cx="67" cy="316" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<circle cx="67" cy="326" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<text x="63" y="319" font-size="6" fill="#000">1</text>
+<text x="63" y="329" font-size="6" fill="#000">2</text>
+<line x1="93" y1="316" x2="155" y2="316" stroke="#000" stroke-width="1.5"/>
+<line x1="93" y1="326" x2="155" y2="495" stroke="#000" stroke-width="1.5"/>
+
+<!-- Rail GND bas -->
+<line x1="155" y1="495" x2="860" y2="495" stroke="#000" stroke-width="1.5"/>
+
+<!-- ════ FU1 2A ════ -->
+<text x="165" y="302" font-size="9" font-weight="bold" fill="#000">FU1</text>
+<text x="163" y="313" font-size="8" fill="#c00" font-weight="bold">2A</text>
+<rect x="155" y="308" width="48" height="14" fill="white" stroke="#000" stroke-width="1.5" rx="2"/>
+<line x1="162" y1="315" x2="197" y2="315" stroke="#000" stroke-width="0.8" stroke-dasharray="3,2"/>
+<line x1="203" y1="315" x2="255" y2="315" stroke="#000" stroke-width="1.5"/>
+
+<!-- ════ LM2596 4V/2A pour A6 ════ -->
+<line x1="255" y1="315" x2="255" y2="362" stroke="#000" stroke-width="1.5"/>
+<line x1="255" y1="315" x2="430" y2="315" stroke="#000" stroke-width="1.5"/>
+<circle cx="255" cy="315" r="3" fill="#000"/>
+
+<rect x="255" y="362" width="115" height="62" fill="white" stroke="#000" stroke-width="1.5"/>
+<text x="312" y="380" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">LM2596</text>
+<text x="312" y="391" font-size="7" text-anchor="middle" fill="#555">Buck 4V / 2A</text>
+<text x="266" y="405" font-size="7" fill="#000">VI</text>
+<text x="356" y="405" font-size="7" fill="#000">VO</text>
+<text x="302" y="420" font-size="7" fill="#000">GND</text>
+<text x="257" y="372" font-size="6" fill="#777">1</text>
+<text x="362" y="372" font-size="6" fill="#777">3</text>
+<text x="304" y="427" font-size="6" fill="#777">2</text>
+
+<line x1="312" y1="424" x2="312" y2="495" stroke="#000" stroke-width="1.5"/>
+<line x1="305" y1="495" x2="319" y2="495" stroke="#000" stroke-width="1"/><line x1="307" y1="500" x2="317" y2="500" stroke="#000" stroke-width="0.8"/><line x1="309" y1="505" x2="315" y2="505" stroke="#000" stroke-width="0.6"/>
+
+<!-- C5 100µF entrée LM2596 -->
+<circle cx="255" cy="362" r="3" fill="#000"/>
+<text x="238" y="456" font-size="7" fill="#000">C5</text>
+<text x="230" y="466" font-size="6" fill="#555">100uF</text>
+<line x1="255" y1="362" x2="255" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="243" y1="448" x2="267" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="243" y1="453" x2="267" y2="453" stroke="#000" stroke-width="1.5"/>
+<line x1="255" y1="453" x2="255" y2="495" stroke="#000" stroke-width="1.5"/>
+
+<!-- Sortie LM2596 → 4V -->
+<line x1="370" y1="393" x2="430" y2="393" stroke="#000" stroke-width="1.5"/>
+<line x1="430" y1="315" x2="430" y2="393" stroke="#000" stroke-width="1.5"/>
+<circle cx="430" cy="393" r="3" fill="#000"/>
+<circle cx="430" cy="315" r="3" fill="#000"/>
+
+<!-- C6 100µF sortie LM2596 -->
+<text x="413" y="456" font-size="7" fill="#000">C6</text>
+<text x="405" y="466" font-size="6" fill="#555">100uF</text>
+<line x1="430" y1="393" x2="430" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="418" y1="448" x2="442" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="418" y1="453" x2="442" y2="453" stroke="#000" stroke-width="1.5"/>
+<line x1="430" y1="453" x2="430" y2="495" stroke="#000" stroke-width="1.5"/>
+
+<!-- Connecteur 4V sortie -->
+<text x="415" y="268" font-size="9" font-weight="bold" fill="#000">4V</text>
+<text x="406" y="279" font-size="7" fill="#555">CONN-SIL2</text>
+<rect x="412" y="282" width="28" height="22" fill="white" stroke="#000" stroke-width="1.5"/>
+<circle cx="421" cy="290" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<circle cx="433" cy="290" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<text x="418" y="293" font-size="6" fill="#000">+</text><text x="430" y="293" font-size="6" fill="#000">−</text>
+<line x1="421" y1="282" x2="421" y2="268" stroke="#000" stroke-width="1.5"/>
+<line x1="421" y1="268" x2="430" y2="268" stroke="#000" stroke-width="1.5"/>
+<line x1="430" y1="268" x2="430" y2="393" stroke="#000" stroke-width="1.5"/>
+<line x1="433" y1="282" x2="433" y2="275" stroke="#000" stroke-width="1"/>
+<line x1="433" y1="275" x2="445" y2="275" stroke="#000" stroke-width="1"/>
+<line x1="445" y1="275" x2="445" y2="495" stroke="#000" stroke-width="1"/>
+<text x="455" y="270" font-size="8" fill="#c00" font-style="italic">→ Module A6 GSM/GPRS</text>
+<text x="455" y="280" font-size="7" fill="#c00" font-style="italic">⚠ pont div. R1=1kΩ/R2=2kΩ sur D1→RXD</text>
+
+<!-- ════ LM7805 12V→5V ════ -->
+<line x1="555" y1="315" x2="555" y2="362" stroke="#000" stroke-width="1.5"/>
+<line x1="430" y1="315" x2="700" y2="315" stroke="#000" stroke-width="1.5"/>
+<circle cx="555" cy="362" r="3" fill="#000"/>
+
+<rect x="515" y="362" width="115" height="62" fill="white" stroke="#000" stroke-width="1.5"/>
+<text x="572" y="380" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">LM7805</text>
+<text x="572" y="391" font-size="7" text-anchor="middle" fill="#555">7805</text>
+<text x="526" y="405" font-size="7" fill="#000">VI</text>
+<text x="616" y="405" font-size="7" fill="#000">VO</text>
+<text x="562" y="420" font-size="7" fill="#000">GND</text>
+<text x="517" y="372" font-size="6" fill="#777">1</text>
+<text x="622" y="372" font-size="6" fill="#777">3</text>
+<text x="564" y="427" font-size="6" fill="#777">2</text>
+
+<line x1="572" y1="424" x2="572" y2="495" stroke="#000" stroke-width="1.5"/>
+<line x1="565" y1="495" x2="579" y2="495" stroke="#000" stroke-width="1"/><line x1="567" y1="500" x2="577" y2="500" stroke="#000" stroke-width="0.8"/><line x1="569" y1="505" x2="575" y2="505" stroke="#000" stroke-width="0.6"/>
+
+<!-- C1 4.7µF entrée 7805 -->
+<text x="538" y="456" font-size="7" fill="#000">C1</text>
+<text x="530" y="466" font-size="6" fill="#555">4.7uF</text>
+<line x1="555" y1="362" x2="555" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="543" y1="448" x2="567" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="543" y1="453" x2="567" y2="453" stroke="#000" stroke-width="1.5"/>
+<line x1="555" y1="453" x2="555" y2="495" stroke="#000" stroke-width="1.5"/>
+
+<!-- Sortie 7805 → rail 5V -->
+<line x1="630" y1="393" x2="690" y2="393" stroke="#000" stroke-width="1.5"/>
+<circle cx="690" cy="393" r="3" fill="#000"/>
+
+<!-- C2 2.2µF sortie 7805 -->
+<text x="673" y="456" font-size="7" fill="#000">C2</text>
+<text x="665" y="466" font-size="6" fill="#555">2.2uF</text>
+<line x1="690" y1="393" x2="690" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="678" y1="448" x2="702" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="678" y1="453" x2="702" y2="453" stroke="#000" stroke-width="1.5"/>
+<line x1="690" y1="453" x2="690" y2="495" stroke="#000" stroke-width="1.5"/>
+
+<!-- Connecteur 5V -->
+<text x="672" y="268" font-size="9" font-weight="bold" fill="#000">5V</text>
+<text x="660" y="279" font-size="7" fill="#555">CONN-SIL2</text>
+<rect x="666" y="282" width="28" height="22" fill="white" stroke="#000" stroke-width="1.5"/>
+<circle cx="675" cy="290" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<circle cx="687" cy="290" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<text x="672" y="293" font-size="6" fill="#000">1</text><text x="684" y="293" font-size="6" fill="#000">2</text>
+<line x1="675" y1="282" x2="675" y2="268" stroke="#000" stroke-width="1.5"/>
+<line x1="675" y1="268" x2="690" y2="268" stroke="#000" stroke-width="1.5"/>
+<line x1="690" y1="268" x2="690" y2="393" stroke="#000" stroke-width="1.5"/>
+
+<!-- Rail 5V → AMS1117 -->
+<line x1="690" y1="315" x2="810" y2="315" stroke="#000" stroke-width="1.5"/>
+<circle cx="690" cy="315" r="3" fill="#000"/>
+<line x1="690" y1="393" x2="810" y2="393" stroke="#000" stroke-width="1.5"/>
+<line x1="810" y1="315" x2="810" y2="362" stroke="#000" stroke-width="1.5"/>
+
+<!-- ════ AMS1117 5V→3.3V ════ -->
+<rect x="770" y="362" width="115" height="62" fill="white" stroke="#000" stroke-width="1.5"/>
+<text x="827" y="380" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">AMS1117</text>
+<text x="827" y="391" font-size="7" text-anchor="middle" fill="#555">3.3V</text>
+<text x="781" y="405" font-size="7" fill="#000">VI</text>
+<text x="871" y="405" font-size="7" fill="#000">VO</text>
+<text x="817" y="420" font-size="7" fill="#000">GND</text>
+<text x="772" y="372" font-size="6" fill="#777">1</text>
+<text x="877" y="372" font-size="6" fill="#777">3</text>
+<text x="819" y="427" font-size="6" fill="#777">2</text>
+
+<circle cx="810" cy="393" r="3" fill="#000"/>
+<line x1="827" y1="424" x2="827" y2="495" stroke="#000" stroke-width="1.5"/>
+<line x1="820" y1="495" x2="834" y2="495" stroke="#000" stroke-width="1"/><line x1="822" y1="500" x2="832" y2="500" stroke="#000" stroke-width="0.8"/><line x1="824" y1="505" x2="830" y2="505" stroke="#000" stroke-width="0.6"/>
+
+<!-- C3 10µF entrée AMS1117 -->
+<text x="793" y="456" font-size="7" fill="#000">C3</text>
+<text x="785" y="466" font-size="6" fill="#555">10uF</text>
+<line x1="810" y1="362" x2="810" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="798" y1="448" x2="822" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="798" y1="453" x2="822" y2="453" stroke="#000" stroke-width="1.5"/>
+<line x1="810" y1="453" x2="810" y2="495" stroke="#000" stroke-width="1.5"/>
+
+<!-- Sortie AMS1117 -->
+<line x1="885" y1="393" x2="900" y2="393" stroke="#000" stroke-width="1.5"/>
+<circle cx="900" cy="393" r="3" fill="#000"/>
+
+<!-- C4 10µF sortie AMS1117 -->
+<text x="883" y="456" font-size="7" fill="#000">C4</text>
+<text x="875" y="466" font-size="6" fill="#555">10uF</text>
+<line x1="900" y1="393" x2="900" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="888" y1="448" x2="912" y2="448" stroke="#000" stroke-width="1.5"/>
+<line x1="888" y1="453" x2="912" y2="453" stroke="#000" stroke-width="1.5"/>
+<line x1="900" y1="453" x2="900" y2="495" stroke="#000" stroke-width="1.5"/>
+
+<!-- Connecteur 3.3V -->
+<text x="881" y="268" font-size="9" font-weight="bold" fill="#000">3.3V</text>
+<text x="869" y="279" font-size="7" fill="#555">CONN-SIL2</text>
+<rect x="876" y="282" width="28" height="22" fill="white" stroke="#000" stroke-width="1.5"/>
+<circle cx="885" cy="290" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<circle cx="897" cy="290" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<text x="882" y="293" font-size="6" fill="#000">1</text><text x="894" y="293" font-size="6" fill="#000">2</text>
+<line x1="885" y1="282" x2="885" y2="268" stroke="#000" stroke-width="1.5"/>
+<line x1="885" y1="268" x2="900" y2="268" stroke="#000" stroke-width="1.5"/>
+<line x1="900" y1="268" x2="900" y2="393" stroke="#000" stroke-width="1.5"/>
+
+<!-- Connecteur 12V monitoring -->
+<text x="243" y="172" font-size="9" font-weight="bold" fill="#000">12V</text>
+<text x="233" y="183" font-size="7" fill="#555">CONN-SIL2</text>
+<rect x="241" y="186" width="28" height="22" fill="white" stroke="#000" stroke-width="1.5"/>
+<circle cx="250" cy="194" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<circle cx="262" cy="194" r="3.5" fill="white" stroke="#000" stroke-width="1"/>
+<line x1="255" y1="208" x2="255" y2="315" stroke="#000" stroke-width="1.5"/>
+<circle cx="255" cy="315" r="3" fill="#000"/>
+
+<!-- ════ CARTOUCHE PAGE 1 ════ -->
+<rect x="548" y="530" width="382" height="92" fill="white" stroke="#222" stroke-width="1.5"/>
+<line x1="548" y1="546" x2="930" y2="546" stroke="#222" stroke-width="0.8"/>
+<line x1="548" y1="562" x2="930" y2="562" stroke="#222" stroke-width="0.8"/>
+<line x1="548" y1="578" x2="930" y2="578" stroke="#222" stroke-width="0.8"/>
+<line x1="548" y1="594" x2="930" y2="594" stroke="#222" stroke-width="0.8"/>
+<line x1="740" y1="530" x2="740" y2="622" stroke="#222" stroke-width="0.8"/>
+<text x="556" y="541" font-size="7" fill="#555">FILE NAME:</text>
+<text x="556" y="557" font-size="8" font-weight="bold" fill="#000">ProjetRC_Alimentation.pdsprj</text>
+<text x="556" y="573" font-size="7" fill="#555">DESIGN TITLE: Carte Alimentation ProjetRC</text>
+<text x="556" y="589" font-size="7" fill="#555">BY: AIT AMIR Youssouf — BTS CIEL ER</text>
+<text x="556" y="605" font-size="7" fill="#555">PATH: D:\B2 CIEL\ProjetRC</text>
+<text x="556" y="617" font-size="7" fill="#555">REV: 1.0</text>
+<text x="748" y="541" font-size="7" fill="#555">DATE:</text>
+<text x="748" y="557" font-size="9" font-weight="bold" fill="#000">04/06/2026</text>
+<text x="748" y="573" font-size="7" fill="#555">PAGE:</text>
+<text x="748" y="589" font-size="9" font-weight="bold" fill="#000">1 of 2</text>
+<text x="748" y="605" font-size="7" fill="#555">TIME: 00:00:00</text>
+
+<!-- ════ TABLEAU ALIMENTATIONS ════ -->
+<rect x="40" y="530" width="500" height="92" fill="#fffff8" stroke="#222" stroke-width="1"/>
+<text x="50" y="545" font-size="9" font-weight="bold" fill="#000">DESCRIPTIF ALIMENTATIONS — datasheets validées</text>
+<line x1="40" y1="549" x2="540" y2="549" stroke="#222" stroke-width="0.5"/>
+<text x="50" y="561" font-size="7" font-weight="bold" fill="#555">Composant</text>
+<text x="160" y="561" font-size="7" font-weight="bold" fill="#555">Tension</text>
+<text x="240" y="561" font-size="7" font-weight="bold" fill="#555">Courant max</text>
+<text x="330" y="561" font-size="7" font-weight="bold" fill="#555">Régulateur PCB</text>
+<line x1="40" y1="564" x2="540" y2="564" stroke="#bbb" stroke-width="0.4"/>
+<text x="50" y="574" font-size="7" fill="#000">Arduino Uno</text><text x="160" y="574" font-size="7" fill="#000">7–12V (VIN)</text><text x="240" y="574" font-size="7" fill="#000">500mA</text><text x="330" y="574" font-size="7" fill="#000">12V direct</text><text x="440" y="574" font-size="7" fill="#0a0">✓ OK</text>
+<text x="50" y="585" font-size="7" fill="#000">NFC PN532</text><text x="160" y="585" font-size="7" fill="#000">5V (3.3–5V)</text><text x="240" y="585" font-size="7" fill="#000">150mA</text><text x="330" y="585" font-size="7" fill="#000">LM7805</text><text x="440" y="585" font-size="7" fill="#0a0">✓ OK</text>
+<text x="50" y="596" font-size="7" fill="#000">Nextion NX3224T028</text><text x="160" y="596" font-size="7" fill="#000">5V (4.75–7V)</text><text x="240" y="596" font-size="7" fill="#c00" font-weight="bold">65mA</text><text x="330" y="596" font-size="7" fill="#000">LM7805</text><text x="440" y="596" font-size="7" fill="#0a0">✓ OK</text>
+<text x="50" y="607" font-size="7" fill="#c00" font-weight="bold">A6 GSM/GPRS</text><text x="160" y="607" font-size="7" fill="#c00" font-weight="bold">4V typ (3.3–4.2V)</text><text x="240" y="607" font-size="7" fill="#c00" font-weight="bold">2A pic !</text><text x="330" y="607" font-size="7" fill="#c00" font-weight="bold">LM2596 dédié</text><text x="440" y="607" font-size="7" fill="#0a0">✓ OK</text>
+<text x="50" y="618" font-size="7" fill="#000">LM393 vitesse</text><text x="160" y="618" font-size="7" fill="#000">5V</text><text x="240" y="618" font-size="7" fill="#000">15mA</text><text x="330" y="618" font-size="7" fill="#000">LM7805</text><text x="440" y="618" font-size="7" fill="#0a0">✓ OK</text>
+</svg>
+</div></div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PAGE 2 : CONNEXIONS MODULES                    -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="pg" id="p1">
+<div class="page" style="width:940px;height:660px">
+<svg width="940" height="660" xmlns="http://www.w3.org/2000/svg">
+<rect width="940" height="660" fill="url(#g)"/>
+<rect width="940" height="660" fill="none" stroke="#222" stroke-width="2"/>
+<line x1="0" y1="30" x2="940" y2="30" stroke="#bbb" stroke-width="0.5"/>
+<line x1="0" y1="628" x2="940" y2="628" stroke="#bbb" stroke-width="0.5"/>
+<line x1="30" y1="0" x2="30" y2="660" stroke="#bbb" stroke-width="0.5"/>
+<line x1="910" y1="0" x2="910" y2="660" stroke="#bbb" stroke-width="0.5"/>
+<text x="115" y="19" font-size="9" text-anchor="middle" fill="#aaa">B</text>
+<text x="289" y="19" font-size="9" text-anchor="middle" fill="#aaa">D</text>
+<text x="463" y="19" font-size="9" text-anchor="middle" fill="#aaa">F</text>
+<text x="637" y="19" font-size="9" text-anchor="middle" fill="#aaa">H</text>
+<text x="811" y="19" font-size="9" text-anchor="middle" fill="#aaa">K</text>
+<text x="18" y="195" font-size="8" text-anchor="middle" fill="#aaa">2</text>
+<text x="18" y="370" font-size="8" text-anchor="middle" fill="#aaa">4</text>
+<text x="18" y="545" font-size="8" text-anchor="middle" fill="#aaa">6</text>
+
+<!-- ════ ARDUINO UNO ════ -->
+<text x="430" y="95" font-size="11" font-weight="bold" text-anchor="middle" fill="#000">ARDUINO UNO</text>
+<text x="430" y="110" font-size="8" text-anchor="middle" fill="#666">ATmega328P — 5V / 16MHz</text>
+<rect x="340" y="116" width="180" height="370" fill="#eef8ee" stroke="#000" stroke-width="2" rx="4"/>
+
+<!-- Pins gauche -->
+<rect x="318" y="132" width="22" height="12" fill="white" stroke="#000" stroke-width="0.8"/><text x="321" y="141" font-size="6" fill="#000">GND</text>
+<rect x="318" y="148" width="22" height="12" fill="white" stroke="#000" stroke-width="0.8"/><text x="321" y="157" font-size="6" fill="#000">5V</text>
+<rect x="318" y="168" width="22" height="12" fill="#ddeeff" stroke="#000" stroke-width="0.8"/><text x="321" y="177" font-size="6" fill="#000">A4</text>
+<rect x="318" y="184" width="22" height="12" fill="#ddeeff" stroke="#000" stroke-width="0.8"/><text x="321" y="193" font-size="6" fill="#000">A5</text>
+<rect x="318" y="210" width="22" height="12" fill="#ffe8d8" stroke="#000" stroke-width="0.8"/><text x="321" y="219" font-size="6" fill="#000">D0</text>
+<rect x="318" y="226" width="22" height="12" fill="#ffe8d8" stroke="#000" stroke-width="0.8"/><text x="321" y="235" font-size="6" fill="#000">D1</text>
+<rect x="318" y="250" width="22" height="12" fill="#f0e0ff" stroke="#000" stroke-width="0.8"/><text x="321" y="259" font-size="6" fill="#000">D2</text>
+<rect x="318" y="266" width="22" height="12" fill="#f0e0ff" stroke="#000" stroke-width="0.8"/><text x="321" y="275" font-size="6" fill="#000">D3</text>
+<rect x="318" y="290" width="22" height="12" fill="#e8ffe8" stroke="#000" stroke-width="0.8"/><text x="321" y="299" font-size="6" fill="#000">D4</text>
+<rect x="318" y="314" width="22" height="12" fill="#fff0aa" stroke="#000" stroke-width="0.8"/><text x="321" y="323" font-size="6" fill="#000">VIN</text>
+<rect x="318" y="330" width="22" height="12" fill="white" stroke="#000" stroke-width="0.8"/><text x="321" y="339" font-size="6" fill="#000">GND</text>
+<rect x="318" y="355" width="22" height="12" fill="#ffe8d8" stroke="#000" stroke-width="0.8"/><text x="321" y="364" font-size="6" fill="#000">D5</text>
+
+<!-- Pins droite Arduino -->
+<rect x="520" y="132" width="22" height="12" fill="#ffeecc" stroke="#000" stroke-width="0.8"/><text x="523" y="141" font-size="6" fill="#000">A0</text>
+<rect x="520" y="148" width="22" height="12" fill="#ffeecc" stroke="#000" stroke-width="0.8"/><text x="523" y="157" font-size="6" fill="#000">A1</text>
+
+<!-- Labels intérieurs Arduino -->
+<text x="430" y="141" font-size="7" text-anchor="middle" fill="#666">GND</text>
+<text x="430" y="157" font-size="7" text-anchor="middle" fill="#1a7a40">5V out</text>
+<text x="430" y="177" font-size="7" text-anchor="middle" fill="#2255aa">SDA I2C</text>
+<text x="430" y="193" font-size="7" text-anchor="middle" fill="#2255aa">SCL I2C</text>
+<text x="430" y="219" font-size="7" text-anchor="middle" fill="#aa5500">RX UART HW</text>
+<text x="430" y="235" font-size="7" text-anchor="middle" fill="#aa5500">TX UART HW</text>
+<text x="430" y="259" font-size="7" text-anchor="middle" fill="#7722aa">SS-RX (D2)</text>
+<text x="430" y="275" font-size="7" text-anchor="middle" fill="#7722aa">SS-TX (D3)</text>
+<text x="430" y="299" font-size="7" text-anchor="middle" fill="#226622">LM393 OUT</text>
+<text x="430" y="323" font-size="7" text-anchor="middle" fill="#888">VIN 12V</text>
+<text x="430" y="339" font-size="7" text-anchor="middle" fill="#666">GND</text>
+<text x="430" y="364" font-size="7" text-anchor="middle" fill="#888">PWRKEY A6</text>
+<text x="430" y="141" font-size="7" text-anchor="middle" fill="#666"></text>
+<text x="530" y="141" font-size="7" fill="#aa6600">V_tension</text>
+<text x="530" y="157" font-size="7" fill="#aa6600">I_courant</text>
+
+<!-- ════ NFC PN532 (haut gauche) ════ -->
+<text x="118" y="95" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">NFC PN532</text>
+<text x="118" y="107" font-size="7" text-anchor="middle" fill="#555">I2C — 5V / 150mA</text>
+<text x="118" y="118" font-size="6" text-anchor="middle" fill="#0a0">Level-shifter intégré ✓</text>
+<rect x="58" y="122" width="122" height="95" fill="#e8f4ff" stroke="#000" stroke-width="1.5" rx="3"/>
+<text x="119" y="143" font-size="8" text-anchor="middle" fill="#2255aa">Mode I2C</text>
+<text x="119" y="156" font-size="7" text-anchor="middle" fill="#666">adresse 0x24</text>
+<text x="119" y="169" font-size="7" text-anchor="middle" fill="#666">Mifare 13.56MHz</text>
+<text x="119" y="182" font-size="7" text-anchor="middle" fill="#666">VCC: 3.3–5V</text>
+<text x="119" y="195" font-size="6" text-anchor="middle" fill="#666">SW DIP: 1-ON 2-OFF</text>
+<!-- Pins NFC -->
+<rect x="180" y="132" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="183" y="141" font-size="6" fill="#000">SDA</text>
+<rect x="180" y="147" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="183" y="156" font-size="6" fill="#000">SCL</text>
+<rect x="80" y="217" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="83" y="226" font-size="6" fill="#000">VCC</text>
+<rect x="118" y="217" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="121" y="226" font-size="6" fill="#000">GND</text>
+
+<!-- Fils NFC I2C → Arduino A4/A5 -->
+<line x1="202" y1="137" x2="260" y2="137" stroke="#2255aa" stroke-width="1.5"/>
+<line x1="260" y1="137" x2="260" y2="174" stroke="#2255aa" stroke-width="1.5"/>
+<line x1="260" y1="174" x2="318" y2="174" stroke="#2255aa" stroke-width="1.5"/>
+<text x="222" y="134" font-size="6" fill="#2255aa">SDA→A4</text>
+<line x1="202" y1="152" x2="265" y2="152" stroke="#2255aa" stroke-width="1.5"/>
+<line x1="265" y1="152" x2="265" y2="190" stroke="#2255aa" stroke-width="1.5"/>
+<line x1="265" y1="190" x2="318" y2="190" stroke="#2255aa" stroke-width="1.5"/>
+<text x="222" y="149" font-size="6" fill="#2255aa">SCL→A5</text>
+
+<!-- Alim NFC 5V -->
+<line x1="91" y1="217" x2="91" y2="248" stroke="#1a7a40" stroke-width="1.2"/>
+<line x1="91" y1="248" x2="46" y2="248" stroke="#1a7a40" stroke-width="1.2"/>
+<line x1="46" y1="122" x2="46" y2="248" stroke="#1a7a40" stroke-width="1.2"/>
+<text x="36" y="185" font-size="6" fill="#1a7a40" writing-mode="tb">5V</text>
+<!-- GND NFC -->
+<line x1="129" y1="217" x2="129" y2="253" stroke="#000" stroke-width="1.2"/>
+<line x1="123" y1="253" x2="135" y2="253" stroke="#000" stroke-width="1"/><line x1="125" y1="257" x2="133" y2="257" stroke="#000" stroke-width="0.8"/><line x1="127" y1="261" x2="131" y2="261" stroke="#000" stroke-width="0.6"/>
+
+<!-- ════ A6 GSM (bas gauche) ════ -->
+<text x="118" y="312" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">MODULE A6 GSM</text>
+<text x="118" y="324" font-size="7" text-anchor="middle" fill="#c00">UART HW D0/D1 — 4V / 2A pic</text>
+<text x="118" y="335" font-size="6" text-anchor="middle" fill="#c00">GPIO logique 2.8V → pont div. requis</text>
+<rect x="58" y="340" width="122" height="125" fill="#fff0e8" stroke="#000" stroke-width="1.5" rx="3"/>
+<text x="119" y="360" font-size="8" text-anchor="middle" fill="#aa5500">UART HW</text>
+<text x="119" y="373" font-size="7" text-anchor="middle" fill="#666">D0(RX)←TXD A6</text>
+<text x="119" y="386" font-size="7" text-anchor="middle" fill="#666">D1(TX)→RXD A6</text>
+<text x="119" y="400" font-size="6" text-anchor="middle" fill="#c00">⚠ R1=1kΩ/R2=2kΩ sur D1→RXD</text>
+<text x="119" y="413" font-size="7" text-anchor="middle" fill="#666">9600 baud</text>
+<text x="119" y="426" font-size="7" text-anchor="middle" fill="#c00">Alim: LM2596 4V/2A</text>
+<text x="119" y="440" font-size="6" text-anchor="middle" fill="#666">PWRKEY → D5 Arduino</text>
+<text x="119" y="452" font-size="6" text-anchor="middle" fill="#666">Condo 100µF anti-pic</text>
+
+<!-- Pins A6 -->
+<rect x="180" y="352" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="183" y="361" font-size="6" fill="#000">TXD</text>
+<rect x="180" y="368" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="183" y="377" font-size="6" fill="#000">RXD</text>
+<rect x="180" y="384" width="22" height="11" fill="#fff0cc" stroke="#000" stroke-width="0.8"/><text x="179" y="393" font-size="6" fill="#000">PWRK</text>
+<rect x="72" y="465" width="22" height="11" fill="#ffcccc" stroke="#c00" stroke-width="0.8"/><text x="69" y="474" font-size="6" fill="#c00">4V IN</text>
+<rect x="112" y="465" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="115" y="474" font-size="6" fill="#000">GND</text>
+
+<!-- Fils A6 UART HW → Arduino D0/D1 -->
+<line x1="202" y1="357" x2="272" y2="357" stroke="#aa5500" stroke-width="1.5"/>
+<line x1="272" y1="357" x2="272" y2="216" stroke="#aa5500" stroke-width="1.5"/>
+<line x1="272" y1="216" x2="318" y2="216" stroke="#aa5500" stroke-width="1.5"/>
+<text x="274" y="355" font-size="6" fill="#aa5500">TXD→D0</text>
+
+<!-- Pont diviseur R1/R2 sur D1→RXD A6 -->
+<rect x="215" y="368" width="42" height="26" fill="#fff5f5" stroke="#c00" stroke-width="0.8" stroke-dasharray="2,1" rx="2"/>
+<text x="236" y="379" font-size="5.5" text-anchor="middle" fill="#c00">R1=1kΩ</text>
+<text x="236" y="389" font-size="5.5" text-anchor="middle" fill="#c00">R2=2kΩ</text>
+<line x1="202" y1="373" x2="215" y2="373" stroke="#aa5500" stroke-width="1"/>
+<line x1="257" y1="232" x2="277" y2="232" stroke="#aa5500" stroke-width="1.5"/>
+<line x1="277" y1="232" x2="318" y2="232" stroke="#aa5500" stroke-width="1.5"/>
+<line x1="257" y1="379" x2="277" y2="379" stroke="#aa5500" stroke-width="1"/>
+<line x1="277" y1="232" x2="277" y2="379" stroke="#aa5500" stroke-width="1"/>
+<text x="279" y="231" font-size="6" fill="#aa5500">RXD←D1</text>
+
+<!-- PWRKEY → D5 -->
+<line x1="202" y1="389" x2="282" y2="389" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+<line x1="282" y1="389" x2="282" y2="361" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+<line x1="282" y1="361" x2="318" y2="361" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+
+<!-- Alim 4V A6 -->
+<line x1="83" y1="465" x2="83" y2="500" stroke="#c00" stroke-width="1.5"/>
+<line x1="83" y1="500" x2="40" y2="500" stroke="#c00" stroke-width="1.5"/>
+<line x1="40" y1="340" x2="40" y2="500" stroke="#c00" stroke-width="1.5"/>
+<text x="30" y="425" font-size="6" fill="#c00" writing-mode="tb">4V LM2596</text>
+<!-- GND A6 -->
+<line x1="123" y1="465" x2="123" y2="505" stroke="#000" stroke-width="1.2"/>
+<line x1="117" y1="505" x2="129" y2="505" stroke="#000" stroke-width="1"/><line x1="119" y1="509" x2="127" y2="509" stroke="#000" stroke-width="0.8"/>
+
+<!-- ════ NEXTION NX3224T028 (droite) ════ -->
+<text x="720" y="95" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">NEXTION NX3224T028</text>
+<text x="720" y="107" font-size="7" text-anchor="middle" fill="#555">SoftSerial D2/D3 — 5V / 65mA</text>
+<text x="720" y="118" font-size="6" text-anchor="middle" fill="#0a0">datasheet: 4.75–7V / 65mA@100%lum ✓</text>
+<rect x="654" y="122" width="132" height="120" fill="#f5eeff" stroke="#000" stroke-width="1.5" rx="3"/>
+<text x="720" y="143" font-size="8" text-anchor="middle" fill="#7722aa">SoftwareSerial</text>
+<text x="720" y="156" font-size="7" text-anchor="middle" fill="#666">OLED_TX=D2 / OLED_RX=D3</text>
+<text x="720" y="169" font-size="7" text-anchor="middle" fill="#666">9600 baud</text>
+<text x="720" y="182" font-size="7" text-anchor="middle" fill="#666">Protocole: 3x 0xFF</text>
+<text x="720" y="195" font-size="7" text-anchor="middle" fill="#666">Flash 4Mo / RAM 3584o</text>
+<text x="720" y="208" font-size="6" text-anchor="middle" fill="#7722aa">Logic 5V compatible ✓</text>
+<text x="720" y="220" font-size="6" text-anchor="middle" fill="#666">sleep: 15mA</text>
+
+<!-- Pins Nextion -->
+<rect x="632" y="136" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="635" y="145" font-size="6" fill="#000">TX</text>
+<rect x="632" y="151" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="635" y="160" font-size="6" fill="#000">RX</text>
+<rect x="668" y="242" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="671" y="251" font-size="6" fill="#000">5V</text>
+<rect x="706" y="242" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="709" y="251" font-size="6" fill="#000">GND</text>
+
+<!-- Fils Nextion SS → Arduino D2/D3 -->
+<line x1="632" y1="141" x2="510" y2="141" stroke="#7722aa" stroke-width="1.5"/>
+<line x1="510" y1="141" x2="510" y2="256" stroke="#7722aa" stroke-width="1.5"/>
+<line x1="510" y1="256" x2="542" y2="256" stroke="#7722aa" stroke-width="1.5"/>
+<text x="548" y="139" font-size="6" fill="#7722aa">TX→D2(SS-RX)</text>
+<line x1="632" y1="156" x2="515" y2="156" stroke="#7722aa" stroke-width="1.5"/>
+<line x1="515" y1="156" x2="515" y2="272" stroke="#7722aa" stroke-width="1.5"/>
+<line x1="515" y1="272" x2="542" y2="272" stroke="#7722aa" stroke-width="1.5"/>
+<text x="548" y="155" font-size="6" fill="#7722aa">RX←D3(SS-TX)</text>
+
+<!-- Alim Nextion 5V -->
+<line x1="679" y1="242" x2="679" y2="268" stroke="#1a7a40" stroke-width="1.2"/>
+<line x1="679" y1="268" x2="798" y2="268" stroke="#1a7a40" stroke-width="1.2"/>
+<line x1="798" y1="122" x2="798" y2="268" stroke="#1a7a40" stroke-width="1.2"/>
+<text x="808" y="195" font-size="6" fill="#1a7a40" writing-mode="tb">5V</text>
+<!-- GND Nextion -->
+<line x1="717" y1="242" x2="717" y2="273" stroke="#000" stroke-width="1.2"/>
+<line x1="711" y1="273" x2="723" y2="273" stroke="#000" stroke-width="1"/><line x1="713" y1="277" x2="721" y2="277" stroke="#000" stroke-width="0.8"/>
+
+<!-- ════ LM393 capteur vitesse (bas droite) ════ -->
+<text x="720" y="312" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">CAPTEUR LM393</text>
+<text x="720" y="324" font-size="7" text-anchor="middle" fill="#555">Tachymètre — 5V / 15mA</text>
+<rect x="654" y="330" width="132" height="100" fill="#eeffee" stroke="#000" stroke-width="1.5" rx="3"/>
+<text x="720" y="352" font-size="8" text-anchor="middle" fill="#226622">Signal numérique</text>
+<text x="720" y="365" font-size="7" text-anchor="middle" fill="#666">OUT → D4 Arduino</text>
+<text x="720" y="378" font-size="7" text-anchor="middle" fill="#666">Disque codeur 20 encoches</text>
+<text x="720" y="391" font-size="7" text-anchor="middle" fill="#666">N(tr/min) = compteur × 30</text>
+<text x="720" y="404" font-size="6" text-anchor="middle" fill="#666">Axe rouleau banc d&#39;essai</text>
+<text x="720" y="416" font-size="6" text-anchor="middle" fill="#666">max: 30 000 tr/min</text>
+
+<!-- Pins LM393 -->
+<rect x="632" y="345" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="635" y="354" font-size="6" fill="#000">OUT</text>
+<rect x="668" y="430" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="671" y="439" font-size="6" fill="#000">VCC</text>
+<rect x="706" y="430" width="22" height="11" fill="white" stroke="#000" stroke-width="0.8"/><text x="709" y="439" font-size="6" fill="#000">GND</text>
+
+<!-- Fil LM393 OUT → D4 -->
+<line x1="632" y1="350" x2="505" y2="350" stroke="#226622" stroke-width="1.5"/>
+<line x1="505" y1="350" x2="505" y2="296" stroke="#226622" stroke-width="1.5"/>
+<line x1="505" y1="296" x2="540" y2="296" stroke="#226622" stroke-width="1.5"/>
+<text x="548" y="349" font-size="6" fill="#226622">OUT→D4</text>
+
+<!-- Alim LM393 5V -->
+<line x1="679" y1="430" x2="679" y2="455" stroke="#1a7a40" stroke-width="1.2"/>
+<line x1="679" y1="455" x2="808" y2="455" stroke="#1a7a40" stroke-width="1.2"/>
+<line x1="808" y1="330" x2="808" y2="455" stroke="#1a7a40" stroke-width="1.2"/>
+<!-- GND LM393 -->
+<line x1="717" y1="430" x2="717" y2="460" stroke="#000" stroke-width="1.2"/>
+<line x1="711" y1="460" x2="723" y2="460" stroke="#000" stroke-width="1"/><line x1="713" y1="464" x2="721" y2="464" stroke="#000" stroke-width="0.8"/>
+
+<!-- ════ Sondes tension/courant (bas centre) ════ -->
+<text x="430" y="520" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">SONDES MESURE</text>
+<rect x="340" y="526" width="180" height="75" fill="#fff8ee" stroke="#000" stroke-width="1.5" rx="3"/>
+<text x="430" y="545" font-size="7" text-anchor="middle" fill="#aa6600">Sonde tension → A0</text>
+<text x="430" y="558" font-size="6" text-anchor="middle" fill="#666">Pont div. → 12V max → 0–5V ADC</text>
+<text x="430" y="572" font-size="7" text-anchor="middle" fill="#aa6600">Sonde courant → A1</text>
+<text x="430" y="585" font-size="6" text-anchor="middle" fill="#666">Effet Hall → 30A max → tension prop.</text>
+
+<!-- Fils sondes → A0/A1 -->
+<line x1="340" y1="539" x2="318" y2="539" stroke="#aa6600" stroke-width="1.2" stroke-dasharray="4,2"/>
+<line x1="318" y1="539" x2="318" y2="138" stroke="#aa6600" stroke-width="1.2" stroke-dasharray="4,2"/>
+<line x1="318" y1="138" x2="542" y2="138" stroke="#aa6600" stroke-width="1.2" stroke-dasharray="4,2"/>
+<line x1="340" y1="572" x2="312" y2="572" stroke="#aa6600" stroke-width="1.2" stroke-dasharray="4,2"/>
+<line x1="312" y1="572" x2="312" y2="154" stroke="#aa6600" stroke-width="1.2" stroke-dasharray="4,2"/>
+<line x1="312" y1="154" x2="542" y2="154" stroke="#aa6600" stroke-width="1.2" stroke-dasharray="4,2"/>
+
+<!-- Arduino VIN ← 12V -->
+<line x1="318" y1="320" x2="250" y2="320" stroke="#888" stroke-width="1.5"/>
+<line x1="250" y1="320" x2="250" y2="570" stroke="#888" stroke-width="1.5"/>
+<rect x="224" y="570" width="54" height="24" fill="white" stroke="#000" stroke-width="1.5"/>
+<circle cx="238" cy="582" r="4" fill="white" stroke="#000" stroke-width="1"/>
+<circle cx="262" cy="582" r="4" fill="white" stroke="#000" stroke-width="1"/>
+<text x="234" y="585" font-size="6" fill="#000">12V</text><text x="258" y="585" font-size="6" fill="#000">G</text>
+<text x="205" y="585" font-size="7" fill="#555">JACK DC</text>
+<!-- GND jack -->
+<line x1="318" y1="336" x2="244" y2="336" stroke="#000" stroke-width="1.2"/>
+<line x1="244" y1="336" x2="244" y2="570" stroke="#000" stroke-width="1.2"/>
+
+<!-- ════ CARTOUCHE PAGE 2 ════ -->
+<rect x="548" y="530" width="382" height="92" fill="white" stroke="#222" stroke-width="1.5"/>
+<line x1="548" y1="546" x2="930" y2="546" stroke="#222" stroke-width="0.8"/>
+<line x1="548" y1="562" x2="930" y2="562" stroke="#222" stroke-width="0.8"/>
+<line x1="548" y1="578" x2="930" y2="578" stroke="#222" stroke-width="0.8"/>
+<line x1="548" y1="594" x2="930" y2="594" stroke="#222" stroke-width="0.8"/>
+<line x1="740" y1="530" x2="740" y2="622" stroke="#222" stroke-width="0.8"/>
+<text x="556" y="541" font-size="7" fill="#555">FILE NAME:</text>
+<text x="556" y="557" font-size="8" font-weight="bold" fill="#000">ProjetRC_Modules.pdsprj</text>
+<text x="556" y="573" font-size="7" fill="#555">DESIGN TITLE: Connexions Modules ProjetRC</text>
+<text x="556" y="589" font-size="7" fill="#555">BY: AIT AMIR Youssouf — BTS CIEL ER</text>
+<text x="556" y="605" font-size="7" fill="#555">PATH: D:\B2 CIEL\ProjetRC</text>
+<text x="556" y="617" font-size="7" fill="#555">REV: 1.0</text>
+<text x="748" y="541" font-size="7" fill="#555">DATE:</text>
+<text x="748" y="557" font-size="9" font-weight="bold" fill="#000">04/06/2026</text>
+<text x="748" y="573" font-size="7" fill="#555">PAGE:</text>
+<text x="748" y="589" font-size="9" font-weight="bold" fill="#000">2 of 2</text>
+
+<!-- Légende -->
+<rect x="40" y="530" width="500" height="92" fill="white" stroke="#222" stroke-width="1"/>
+<text x="50" y="545" font-size="8" font-weight="bold" fill="#000">LÉGENDE — Pins confirmées depuis code source git</text>
+<line x1="40" y1="549" x2="540" y2="549" stroke="#bbb" stroke-width="0.4"/>
+<line x1="50" y1="560" x2="82" y2="560" stroke="#2255aa" stroke-width="2"/><text x="87" y="563" font-size="7" fill="#000">I2C SDA/SCL — NFC PN532 (A4/A5)</text>
+<line x1="50" y1="572" x2="82" y2="572" stroke="#aa5500" stroke-width="2"/><text x="87" y="575" font-size="7" fill="#000">UART HW D0/D1 — A6 GSM</text>
+<line x1="50" y1="584" x2="82" y2="584" stroke="#7722aa" stroke-width="2"/><text x="87" y="587" font-size="7" fill="#000">SoftSerial D2/D3 — Nextion (OLED_TX=2, OLED_RX=3)</text>
+<line x1="50" y1="596" x2="82" y2="596" stroke="#226622" stroke-width="2"/><text x="87" y="599" font-size="7" fill="#000">Numérique D4 — LM393 tachymètre</text>
+<line x1="50" y1="608" x2="82" y2="608" stroke="#aa6600" stroke-width="1.5" stroke-dasharray="4,2"/><text x="87" y="611" font-size="7" fill="#000">Analogique A0/A1 — sondes tension/courant</text>
+<line x1="280" y1="560" x2="312" y2="560" stroke="#1a7a40" stroke-width="2"/><text x="317" y="563" font-size="7" fill="#000">Alim 5V (LM7805)</text>
+<line x1="280" y1="572" x2="312" y2="572" stroke="#c00" stroke-width="2"/><text x="317" y="575" font-size="7" fill="#000">Alim 4V/2A (LM2596) — A6 GSM</text>
+<line x1="280" y1="584" x2="312" y2="584" stroke="#888" stroke-width="2"/><text x="317" y="587" font-size="7" fill="#000">Alim 12V — Arduino VIN (Jack DC)</text>
+<rect x="280" y="592" width="30" height="10" fill="#fff5f5" stroke="#c00" stroke-width="0.8" stroke-dasharray="2,1" rx="1"/><text x="317" y="599" font-size="7" fill="#c00">Pont diviseur R1=1kΩ/R2=2kΩ (5V→2.8V D1→RXD)</text>
+</svg>
+</div></div>
+
+<script>
+function show(n){
+  document.querySelectorAll('.pg').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+}
+</script>
+</body>
+</html>
