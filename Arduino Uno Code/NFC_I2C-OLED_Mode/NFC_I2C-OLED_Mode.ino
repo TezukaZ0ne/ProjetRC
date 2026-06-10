@@ -124,10 +124,11 @@ void gsmInit() {
 
   Serial.println("[GSM] Attente silence boot A6...");
   unsigned long derniereByte = millis();
-  while (millis() - derniereByte < 3000) {
+  unsigned long debutAttente = millis();
+  while (millis() - derniereByte < 3000 && millis() - debutAttente < 10000) {
     if (gsmSerial.available()) {
       gsmSerial.read();
-      derniereByte = millis(); // reset si on reçoit encore qqch
+      derniereByte = millis();
     }
   }
   Serial.println("[GSM] Boot A6 termine, envoi AT...");
