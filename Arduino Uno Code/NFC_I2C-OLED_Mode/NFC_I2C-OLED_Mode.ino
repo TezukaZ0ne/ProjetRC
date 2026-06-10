@@ -82,7 +82,8 @@ void gsmInit() {
   // Note : SoftwareSerial ne peut gérer qu'un seul port à la fois
   // On libère le Nextion avant d'initialiser le GSM
   oledSerial.end();
-  gsmSerial.begin(115200);
+  gsmSerial.begin(9600);
+  gsmSerial.listen();
   delay(2000);
 
   gsmSerial.println("AT");
