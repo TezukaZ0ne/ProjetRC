@@ -132,7 +132,8 @@ while True:
                 print(f"[RFID] Erreur réseau : {e}")
                 arduino.write("ACCES REFUSE\n".encode("utf-8"))
             except ValueError as e:
-                print(f"[RFID] Erreur JSON : {e} — réponse brute : {response.text}")
+                brute = response.text if "response" in locals() else "non disponible"
+                print(f"[RFID] Erreur JSON : {e} — réponse brute : {brute}")
                 arduino.write("ACCES REFUSE\n".encode("utf-8"))
 
         # ── Bloc Vitesse ──────────────────────────────────
