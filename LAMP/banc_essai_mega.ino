@@ -1,4 +1,5 @@
 #include <Wire.h>
+#include <SoftwareSerial.h>
 
 #define LCD_ADDR 0x3E
 
@@ -6,6 +7,11 @@
 const int PIN_COURANT = A8;
 const int PIN_TENSION = A15;
 const int PIN_VITESSE = A11;
+
+// ── Module GSM A6 (SoftwareSerial) ────────────────────────
+// TX Arduino → RX A6 : broche 10
+// RX Arduino ← TX A6 : broche 11
+SoftwareSerial gsmSerial(11, 10);
 
 // ── Calibration Phidgets 1135 ±30V ───────────────────────
 const float OFFSET_TENSION      = 2.669;
@@ -33,7 +39,7 @@ unsigned long dernierTemps      = 0;
 int dernierEtat                 = HIGH;
 unsigned long nbImpulsions      = 0;
 float vitesse_kmh               = 0.0;
-float tours_par_sec             = 0.0;   // ← exposé globalement
+float tours_par_sec             = 0.0;
 
 // ── LCD ───────────────────────────────────────────────────
 
@@ -84,6 +90,80 @@ void lcdInit() {
   delay(2);
 }
 
+// ── GSM A6 ────────────────────────────────────────────────
+
+// Attend une réponse du A6 contenant 'expected', timeout en ms
+bool gsmAttendre(const char* expected, unsigned long timeout = 5000) {
+  String reponse = "";
+  unsigned long debut = millis();
+  while (millis() - debut < timeout) {
+    while (gsmSerial.available()) {
+      char c = gsmSerial.read();
+      reponse += c;
+    }
+    if (reponse.indexOf(expected) != -1) return true;
+  }
+  Serial.print("[GSM] Réponse: ");
+  Serial.println(reponse);
+  return false;
+}
+
+void gsmInit() {
+  gsmSerial.begin(9600);
+  delay(2000);
+
+  // Test communication
+  gsmSerial.println("AT");
+  if (!gsmAttendre("OK", 3000)) {
+    Serial.println("[GSM] Module A6 non répondant !");
+    return;
+  }
+
+  // Désactiver l'écho
+  gsmSerial.println("ATE0");
+  gsmAttendre("OK");
+
+  // Mode SMS texte
+  gsmSerial.println("AT+CMGF=1");
+  gsmAttendre("OK");
+
+  // Encodage GSM 7-bit (évite les problèmes accents)
+  gsmSerial.println("AT+CSCS=\"GSM\"");
+  gsmAttendre("OK");
+
+  Serial.println("[GSM] Module A6 initialisé.");
+}
+
+// Envoie un SMS — numero format: "0745461370"
+// message : texte brut, max ~160 chars, sans accents
+void gsmEnvoyerSMS(const char* numero, const char* message) {
+  Serial.print("[GSM] Envoi SMS vers ");
+  Serial.println(numero);
+
+  // Commande AT+CMGS
+  gsmSerial.print("AT+CMGS=\"");
+  gsmSerial.print(numero);
+  gsmSerial.println("\"");
+
+  // Attendre le prompt '>'
+  if (!gsmAttendre(">", 5000)) {
+    Serial.println("[GSM] Pas de prompt > !");
+    return;
+  }
+
+  // Envoyer le message
+  gsmSerial.print(message);
+  // Ctrl+Z pour valider
+  gsmSerial.write(26);
+
+  // Attendre confirmation +CMGS
+  if (gsmAttendre("+CMGS", 15000)) {
+    Serial.println("[GSM] SMS envoyé avec succès.");
+  } else {
+    Serial.println("[GSM] Échec envoi SMS.");
+  }
+}
+
 // ── Capteurs ──────────────────────────────────────────────
 
 float lireTension() {
@@ -125,7 +205,6 @@ float calculerVitesse() {
 
   dernierTemps = maintenant;
 
-  // tours par seconde ─ exposé globalement pour le Serial
   tours_par_sec = (float)nbImpulsions / NB_IMPULSIONS_PAR_TOUR / (duree / 1000.0);
   vitesse_kmh   = 2.0 * PI * RAYON_ROUE_M * tours_par_sec * 3.6;
 
@@ -140,13 +219,11 @@ float calculerVitesse() {
 
 void afficherEcranVC(float tension, float courant) {
   char buf[10];
-
   lcdCursor(0, 0);
   dtostrf(tension, 7, 2, buf);
   lcdTexte("V:");
   lcdTexte(buf);
   lcdTexte(" V  ");
-
   lcdCursor(0, 1);
   dtostrf(courant, 7, 2, buf);
   lcdTexte("C:");
@@ -156,14 +233,52 @@ void afficherEcranVC(float tension, float courant) {
 
 void afficherEcranVitesse(float vitesse) {
   char buf[10];
-
   lcdCursor(0, 0);
   lcdTexte("Vitesse:        ");
-
   lcdCursor(0, 1);
   dtostrf(vitesse, 8, 1, buf);
   lcdTexte(buf);
   lcdTexte(" km/h   ");
+}
+
+// ── Traitement commandes reçues du Raspberry Pi ───────────
+// Format attendu depuis UID_Check.py :
+//   ACCES AUTORISE
+//   ACCES REFUSE
+//   SMS:<numero>|<message>
+void traiterCommandeSerie(String cmd) {
+  cmd.trim();
+
+  if (cmd == "ACCES AUTORISE") {
+    Serial.println("[INFO] Accès autorisé");
+    lcdEffacer();
+    lcdCursor(0, 0); lcdTexte("  ACCES OK  ");
+    lcdCursor(0, 1); lcdTexte("  Bienvenue!");
+    delay(2000);
+    lcdEffacer();
+
+  } else if (cmd == "ACCES REFUSE") {
+    Serial.println("[INFO] Accès refusé");
+    lcdEffacer();
+    lcdCursor(0, 0); lcdTexte("  ACCES KO  ");
+    lcdCursor(0, 1); lcdTexte(" Carte inconnue");
+    delay(2000);
+    lcdEffacer();
+
+  } else if (cmd.startsWith("SMS:")) {
+    // Format : SMS:<numero>|<message>
+    String payload = cmd.substring(4);
+    int sep = payload.indexOf('|');
+    if (sep != -1) {
+      String numero  = payload.substring(0, sep);
+      String message = payload.substring(sep + 1);
+      Serial.print("[SMS] Destinataire: "); Serial.println(numero);
+      Serial.print("[SMS] Message: "); Serial.println(message);
+      gsmEnvoyerSMS(numero.c_str(), message.c_str());
+    } else {
+      Serial.println("[SMS] Format invalide");
+    }
+  }
 }
 
 // ─────────────────────────────────────────────────────────
@@ -171,25 +286,30 @@ void afficherEcranVitesse(float vitesse) {
 void setup() {
   Wire.begin();
   lcdInit();
-
   pinMode(PIN_VITESSE, INPUT);
 
-  lcdCursor(0, 0);
-  lcdTexte("  Voltmetre /");
-  lcdCursor(0, 1);
-  lcdTexte("  Amperemetre");
+  lcdCursor(0, 0); lcdTexte("  Voltmetre /");
+  lcdCursor(0, 1); lcdTexte("  Amperemetre");
   delay(1500);
   lcdEffacer();
 
   dernierTemps      = millis();
   dernierChangement = millis();
-  Serial.begin(9600);
+
+  Serial.begin(9600);   // Communication Raspberry Pi
+  gsmInit();            // Initialisation module A6
 }
 
 void loop() {
   unsigned long maintenant = millis();
 
   lireImpulsions();
+
+  // ── Lecture commandes depuis Raspberry Pi ─────────────
+  if (Serial.available()) {
+    String cmd = Serial.readStringUntil('\n');
+    traiterCommandeSerie(cmd);
+  }
 
   if (maintenant - dernierChangement >= INTERVALLE_ECRAN) {
     dernierChangement = maintenant;
@@ -202,7 +322,7 @@ void loop() {
 
     float tension = lireTension();
     float courant = lireCourant();
-    float vitesse = calculerVitesse();   // met aussi à jour tours_par_sec
+    float vitesse = calculerVitesse();
 
     if (ecran1) {
       afficherEcranVC(tension, courant);
@@ -210,13 +330,12 @@ void loop() {
       afficherEcranVitesse(vitesse);
     }
 
-    // ── Ligne 1 : tension / courant (débogage) ────────────
+    // Débogage
     Serial.print("V: ");    Serial.print(tension, 2);
     Serial.print(" V   C: "); Serial.print(courant, 2);
     Serial.println(" A");
 
-    // ── Ligne 2 : vitesse parseable par le Python ─────────
-    // Format fixe : VITESSE:<km/h>;<tr/s>
+    // Format parseable Python
     Serial.print("VITESSE:");
     Serial.print(vitesse, 1);
     Serial.print(";");
