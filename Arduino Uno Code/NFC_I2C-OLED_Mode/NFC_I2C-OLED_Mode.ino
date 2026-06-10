@@ -14,8 +14,8 @@ NfcAdapter nfc(pn532_i2c);
 SoftwareSerial oledSerial(OLED_RX, OLED_TX);
 
 // ── Module GSM A6 : TX=7, RX=6 ───────────────────────────
-#define GSM_TX 7
-#define GSM_RX 6
+#define GSM_TX 6
+#define GSM_RX 5
 SoftwareSerial gsmSerial(GSM_RX, GSM_TX);
 
 // ── Nextion : buffer écran ────────────────────────────────
