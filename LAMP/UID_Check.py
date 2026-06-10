@@ -79,7 +79,7 @@ def construire_sms(prenom, uid, distance_km, vitesse_kmh):
 
 while True:
     try:
-        line = arduino.readline().decode("utf-8").strip()
+        line = arduino.readline().decode("utf-8", errors="ignore").strip()
 
         # ── Bloc RFID ─────────────────────────────────────
         if line.startswith("UID:"):
