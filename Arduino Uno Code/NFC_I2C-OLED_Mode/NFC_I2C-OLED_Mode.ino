@@ -13,11 +13,11 @@ NfcAdapter nfc(pn532_i2c);
 #define OLED_RX 3
 SoftwareSerial oledSerial(OLED_RX, OLED_TX);
 
-// ── Module GSM A6 : TX=4, RX=5 ───────────────────────────
-// Broche 4 Arduino → RX du A6
-// Broche 5 Arduino ← TX du A6
-#define GSM_TX 4
-#define GSM_RX 5
+// ── Module GSM A6 : TX=7, RX=6 ───────────────────────────
+// Broche 7 Arduino → RXD du A6
+// Broche 6 Arduino ← TX du A6
+#define GSM_TX 7
+#define GSM_RX 6
 SoftwareSerial gsmSerial(GSM_RX, GSM_TX);
 
 // ── Nextion : buffer écran ────────────────────────────────
@@ -79,22 +79,32 @@ bool gsmAttendre(const char* expected, unsigned long timeout = 5000) {
 }
 
 void gsmInit() {
-  // Note : SoftwareSerial ne peut gérer qu'un seul port à la fois
-  // On libère le Nextion avant d'initialiser le GSM
+  // Libère le Nextion avant d'initialiser le GSM
   oledSerial.end();
   gsmSerial.begin(9600);
   gsmSerial.listen();
-  delay(2000);
+  delay(5000); // A6 lent au démarrage : 5s minimum
 
-  gsmSerial.println("AT");
-  if (!gsmAttendre("OK", 3000)) {
+  // Vider le buffer avant d'envoyer AT
+  while (gsmSerial.available()) gsmSerial.read();
+
+  // Jusqu'à 5 tentatives pour obtenir OK
+  bool ok = false;
+  for (int i = 0; i < 5; i++) {
+    gsmSerial.println("AT");
+    if (gsmAttendre("OK", 2000)) { ok = true; break; }
+    delay(1000);
+  }
+
+  if (!ok) {
     Serial.println("[GSM] Module A6 non repondant !");
-    oledSerial.begin(9600); // restitue Nextion
+    oledSerial.begin(9600);
     return;
   }
-  gsmSerial.println("ATE0");       // Désactiver écho
+
+  gsmSerial.println("ATE0");        // Désactiver écho
   gsmAttendre("OK");
-  gsmSerial.println("AT+CMGF=1"); // Mode texte SMS
+  gsmSerial.println("AT+CMGF=1");  // Mode texte SMS
   gsmAttendre("OK");
   gsmSerial.println("AT+CSCS=\"GSM\""); // Encodage GSM 7-bit
   gsmAttendre("OK");
@@ -106,9 +116,11 @@ void gsmInit() {
 void gsmEnvoyerSMS(String numero, String message) {
   Serial.println("[GSM] Envoi SMS vers " + numero);
 
-  // SoftwareSerial : on doit écouter gsmSerial
-  oledSerial.end();   // libère les pins SoftwareSerial Nextion
-  gsmSerial.listen(); // écoute le A6
+  oledSerial.end();
+  gsmSerial.listen();
+
+  // Vider le buffer avant d'envoyer
+  while (gsmSerial.available()) gsmSerial.read();
 
   gsmSerial.print("AT+CMGS=\"");
   gsmSerial.print(numero);
@@ -116,7 +128,7 @@ void gsmEnvoyerSMS(String numero, String message) {
 
   if (!gsmAttendre(">", 5000)) {
     Serial.println("[GSM] Pas de prompt > !");
-    oledSerial.begin(9600); // restitue Nextion
+    oledSerial.begin(9600);
     return;
   }
 
@@ -129,7 +141,6 @@ void gsmEnvoyerSMS(String numero, String message) {
     Serial.println("[GSM] Echec envoi SMS.");
   }
 
-  // Restitue le port Nextion
   oledSerial.begin(9600);
 }
 
