@@ -4,7 +4,7 @@
 //  Helpers BDD
 // ═══════════════════════════════════════════════════════
 function getConn() {
-    $conn = new mysqli("127.0.0.1", "root", "rc123", "projet_rc");
+    $conn = new mysqli("localhost", "root", "rc123", "projet_rc");
     if ($conn->connect_error) die("Erreur BDD");
     return $conn;
 }
