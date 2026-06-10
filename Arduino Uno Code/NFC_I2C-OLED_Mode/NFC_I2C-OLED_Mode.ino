@@ -14,8 +14,6 @@ NfcAdapter nfc(pn532_i2c);
 SoftwareSerial oledSerial(OLED_RX, OLED_TX);
 
 // ── Module GSM A6 : TX=7, RX=6 ───────────────────────────
-// Broche 7 Arduino → RXD du A6
-// Broche 6 Arduino ← TX du A6
 #define GSM_TX 7
 #define GSM_RX 6
 SoftwareSerial gsmSerial(GSM_RX, GSM_TX);
@@ -23,6 +21,8 @@ SoftwareSerial gsmSerial(GSM_RX, GSM_TX);
 // ── Nextion : buffer écran ────────────────────────────────
 #define MAX_LINES 6
 String screenBuffer[MAX_LINES];
+
+long gsmBaudRate = 0; // baud rate détecté
 
 // ─────────────────────────────────────────────────────────
 //  NEXTION
@@ -63,7 +63,6 @@ void afficherAcces(String ligne1, String ligne2) {
 //  GSM A6
 // ─────────────────────────────────────────────────────────
 
-// Attend une réponse contenant 'expected' dans le délai imparti
 bool gsmAttendre(const char* expected, unsigned long timeout = 5000) {
   String reponse = "";
   unsigned long debut = millis();
@@ -78,48 +77,82 @@ bool gsmAttendre(const char* expected, unsigned long timeout = 5000) {
   return false;
 }
 
-void gsmInit() {
-  // Libère le Nextion avant d'initialiser le GSM
-  oledSerial.end();
-  gsmSerial.begin(9600);
+bool gsmTesterBaud(long baud) {
+  Serial.print("[GSM] Test baud rate: ");
+  Serial.println(baud);
+
+  gsmSerial.begin(baud);
   gsmSerial.listen();
-  delay(5000); // A6 lent au démarrage : 5s minimum
+  delay(500);
+  while (gsmSerial.available()) gsmSerial.read(); // flush
 
-  // Vider le buffer avant d'envoyer AT
-  while (gsmSerial.available()) gsmSerial.read();
-
-  // Jusqu'à 5 tentatives pour obtenir OK
-  bool ok = false;
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 3; i++) {
     gsmSerial.println("AT");
-    if (gsmAttendre("OK", 2000)) { ok = true; break; }
-    delay(1000);
+    if (gsmAttendre("OK", 2000)) {
+      Serial.print("[GSM] OK detecte a ");
+      Serial.println(baud);
+      return true;
+    }
+    delay(300);
+  }
+  return false;
+}
+
+void gsmInit() {
+  oledSerial.end();
+  delay(5000); // attente démarrage A6
+
+  long bauds[] = { 9600, 115200, 57600, 19200, 38400 };
+  int nbBauds = 5;
+
+  for (int b = 0; b < nbBauds; b++) {
+    if (gsmTesterBaud(bauds[b])) {
+      gsmBaudRate = bauds[b];
+      break;
+    }
   }
 
-  if (!ok) {
-    Serial.println("[GSM] Module A6 non repondant !");
+  if (gsmBaudRate == 0) {
+    Serial.println("[GSM] Module A6 non repondant sur aucun baud rate !");
     oledSerial.begin(9600);
     return;
   }
 
-  gsmSerial.println("ATE0");        // Désactiver écho
+  // Si pas à 9600, on force le A6 à 9600 pour la suite
+  if (gsmBaudRate != 9600) {
+    Serial.println("[GSM] Forçage baud rate a 9600...");
+    gsmSerial.print("AT+IPR=9600\r\n");
+    delay(500);
+    gsmSerial.begin(9600);
+    gsmSerial.listen();
+    delay(500);
+    gsmSerial.println("AT");
+    if (!gsmAttendre("OK", 2000)) {
+      Serial.println("[GSM] Echec forçage 9600 !");
+      oledSerial.begin(9600);
+      return;
+    }
+    gsmBaudRate = 9600;
+    Serial.println("[GSM] Baud rate fixe a 9600.");
+  }
+
+  gsmSerial.println("ATE0");         // Désactiver écho
   gsmAttendre("OK");
-  gsmSerial.println("AT+CMGF=1");  // Mode texte SMS
+  gsmSerial.println("AT+CMGF=1");   // Mode texte SMS
   gsmAttendre("OK");
   gsmSerial.println("AT+CSCS=\"GSM\""); // Encodage GSM 7-bit
   gsmAttendre("OK");
 
   Serial.println("[GSM] Module A6 initialise.");
-  oledSerial.begin(9600); // restitue Nextion
+  oledSerial.begin(9600);
 }
 
 void gsmEnvoyerSMS(String numero, String message) {
   Serial.println("[GSM] Envoi SMS vers " + numero);
 
   oledSerial.end();
+  gsmSerial.begin(9600);
   gsmSerial.listen();
-
-  // Vider le buffer avant d'envoyer
   while (gsmSerial.available()) gsmSerial.read();
 
   gsmSerial.print("AT+CMGS=\"");
@@ -145,11 +178,7 @@ void gsmEnvoyerSMS(String numero, String message) {
 }
 
 // ─────────────────────────────────────────────────────────
-//  Traitement commandes reçues depuis Raspberry Pi
-//  via Serial (USB) :
-//    ACCES AUTORISE
-//    ACCES REFUSE
-//    SMS:<numero>|<message>
+//  Traitement commandes
 // ─────────────────────────────────────────────────────────
 void traiterCommande(String cmd) {
   cmd.trim();
@@ -186,8 +215,8 @@ void traiterCommande(String cmd) {
 // ─────────────────────────────────────────────────────────
 
 void setup() {
-  Serial.begin(9600);     // Communication Raspberry Pi (USB)
-  oledSerial.begin(9600); // Nextion
+  Serial.begin(9600);
+  oledSerial.begin(9600);
 
   delay(500);
   sendToNextion("rest");
@@ -198,20 +227,17 @@ void setup() {
   nfc.begin();
   addLine("NFC ready");
 
-  gsmInit();              // Module A6 GSM
+  gsmInit();
 
   addLine("Scan card...");
 }
 
 void loop() {
-
-  // ── Lecture commande Raspberry Pi ─────────────────────
   if (Serial.available()) {
     String cmd = Serial.readStringUntil('\n');
     traiterCommande(cmd);
   }
 
-  // ── Lecture carte NFC ─────────────────────────────────
   if (nfc.tagPresent()) {
     NfcTag tag = nfc.read();
     String uid = tag.getUidString();
@@ -221,10 +247,8 @@ void loop() {
     addLine("Card detected");
     addLine("UID:" + uid);
 
-    // Envoie l'UID au Raspberry Pi
     Serial.println("UID:" + uid);
 
-    // Attente réponse Raspberry Pi (5s max)
     unsigned long debut = millis();
     String reponse = "";
     while (millis() - debut < 5000) {
