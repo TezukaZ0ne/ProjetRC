@@ -117,17 +117,22 @@ void gsmInit() {
   }
 
   // Maintenant on tente à 9600
-  delay(500);
+  // On attend 3s de plus pour que la bannière de boot A6 se termine
   gsmSerial.begin(9600);
   gsmSerial.listen();
-  delay(500);
-  while (gsmSerial.available()) gsmSerial.read();
+  delay(3000);
+  // Vider tout ce que le A6 a envoyé pendant le boot
+  unsigned long flushStart = millis();
+  while (millis() - flushStart < 2000) {
+    while (gsmSerial.available()) gsmSerial.read();
+    delay(100);
+  }
 
   bool ok = false;
   for (int i = 0; i < 5; i++) {
     gsmSerial.println("AT");
-    if (gsmAttendre("OK", 2000)) { ok = true; break; }
-    delay(500);
+    if (gsmAttendre("OK", 3000)) { ok = true; break; }
+    delay(1000);
   }
 
   if (!ok) {
