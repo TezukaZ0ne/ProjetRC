@@ -80,13 +80,15 @@ bool gsmAttendre(const char* expected, unsigned long timeout = 5000) {
 
 void gsmInit() {
   // Note : SoftwareSerial ne peut gérer qu'un seul port à la fois
-  // On switche sur gsmSerial pour l'init
+  // On libère le Nextion avant d'initialiser le GSM
+  oledSerial.end();
   gsmSerial.begin(9600);
   delay(2000);
 
   gsmSerial.println("AT");
   if (!gsmAttendre("OK", 3000)) {
     Serial.println("[GSM] Module A6 non repondant !");
+    oledSerial.begin(9600); // restitue Nextion
     return;
   }
   gsmSerial.println("ATE0");       // Désactiver écho
@@ -97,6 +99,7 @@ void gsmInit() {
   gsmAttendre("OK");
 
   Serial.println("[GSM] Module A6 initialise.");
+  oledSerial.begin(9600); // restitue Nextion
 }
 
 void gsmEnvoyerSMS(String numero, String message) {
