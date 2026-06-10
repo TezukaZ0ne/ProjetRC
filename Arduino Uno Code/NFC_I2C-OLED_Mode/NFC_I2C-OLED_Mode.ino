@@ -102,39 +102,41 @@ void gsmInit() {
   oledSerial.end();
   delay(5000); // attente démarrage A6
 
-  long bauds[] = { 9600, 115200, 57600, 19200, 38400 };
+  // Envoi AT+IPR=9600 à l'aveugle sur tous les baud rates
+  // pour forcer le A6 à 9600 quoi qu'il arrive
+  long bauds[] = { 115200, 57600, 38400, 19200, 9600 };
   int nbBauds = 5;
-
+  Serial.println("[GSM] Forçage IPR=9600 sur tous baud rates...");
   for (int b = 0; b < nbBauds; b++) {
-    if (gsmTesterBaud(bauds[b])) {
-      gsmBaudRate = bauds[b];
-      break;
-    }
+    gsmSerial.begin(bauds[b]);
+    gsmSerial.listen();
+    delay(200);
+    while (gsmSerial.available()) gsmSerial.read();
+    gsmSerial.println("AT+IPR=9600");
+    delay(300);
   }
 
-  if (gsmBaudRate == 0) {
-    Serial.println("[GSM] Module A6 non repondant sur aucun baud rate !");
+  // Maintenant on tente à 9600
+  delay(500);
+  gsmSerial.begin(9600);
+  gsmSerial.listen();
+  delay(500);
+  while (gsmSerial.available()) gsmSerial.read();
+
+  bool ok = false;
+  for (int i = 0; i < 5; i++) {
+    gsmSerial.println("AT");
+    if (gsmAttendre("OK", 2000)) { ok = true; break; }
+    delay(500);
+  }
+
+  if (!ok) {
+    Serial.println("[GSM] Module A6 non repondant !");
     oledSerial.begin(9600);
     return;
   }
-
-  // Si pas à 9600, on force le A6 à 9600 pour la suite
-  if (gsmBaudRate != 9600) {
-    Serial.println("[GSM] Forçage baud rate a 9600...");
-    gsmSerial.print("AT+IPR=9600\r\n");
-    delay(500);
-    gsmSerial.begin(9600);
-    gsmSerial.listen();
-    delay(500);
-    gsmSerial.println("AT");
-    if (!gsmAttendre("OK", 2000)) {
-      Serial.println("[GSM] Echec forçage 9600 !");
-      oledSerial.begin(9600);
-      return;
-    }
-    gsmBaudRate = 9600;
-    Serial.println("[GSM] Baud rate fixe a 9600.");
-  }
+  gsmBaudRate = 9600;
+  Serial.println("[GSM] A6 verrouille a 9600 baud.");
 
   gsmSerial.println("ATE0");         // Désactiver écho
   gsmAttendre("OK");
