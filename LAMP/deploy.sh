@@ -1,34 +1,32 @@
 #!/bin/bash
 # ── Script de déploiement automatique LAMP ────────────────
-# À exécuter sur le Raspberry Pi avec : sudo bash deploy.sh
+# À exécuter sur le Raspberry Pi avec : sudo bash LAMP/deploy.sh
+
+set -e
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "=== Déploiement Banc RC ==="
 
 # 1. Copie du PHP
 echo "[1/4] Copie check_uid.php..."
-sudo cp "$(dirname "$0")/check_uid.php" /var/www/html/check_uid.php
-sudo cp "$(dirname "$0")/../imgs/bancEssais.JPEG" /var/www/html/bancEssais.JPEG 2>/dev/null || true
-sudo chown www-data:www-data /var/www/html/check_uid.php
+cp "$SCRIPT_DIR/check_uid.php" /var/www/html/check_uid.php
+cp "$SCRIPT_DIR/../imgs/bancEssais.JPEG" /var/www/html/bancEssais.JPEG 2>/dev/null || true
+chown www-data:www-data /var/www/html/check_uid.php
 echo "      OK"
 
-# 2. Création user MySQL dédié + BDD si nécessaire
+# 2. Création user MySQL dédié + BDD
 echo "[2/4] Configuration MySQL..."
-sudo mariadb << 'SQL'
+mariadb << 'SQL'
 CREATE DATABASE IF NOT EXISTS projet_rc CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 CREATE USER IF NOT EXISTS 'rc_user'@'localhost' IDENTIFIED BY 'rc123';
 GRANT ALL PRIVILEGES ON projet_rc.* TO 'rc_user'@'localhost';
-
--- Si root n'a pas de mot de passe, on lui en met un
--- ALTER USER 'root'@'localhost' IDENTIFIED BY 'rc123';
-
 FLUSH PRIVILEGES;
 SQL
 echo "      OK"
 
 # 3. Création des tables
 echo "[3/4] Création des tables..."
-sudo mariadb projet_rc << 'SQL'
+mariadb projet_rc << 'SQL'
 CREATE TABLE IF NOT EXISTS utilisateurs (
     id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
     uid       VARCHAR(30)  NOT NULL UNIQUE,
@@ -62,7 +60,7 @@ echo "      OK"
 
 # 4. Restart Apache
 echo "[4/4] Restart Apache..."
-sudo systemctl restart apache2
+systemctl restart apache2
 echo "      OK"
 
 echo ""
