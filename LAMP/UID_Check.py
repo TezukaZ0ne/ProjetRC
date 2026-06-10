@@ -1,25 +1,33 @@
 import serial
+import serial.tools.list_ports
 import requests
 import time
 import unicodedata
 
 # ── Configuration ─────────────────────────────────────────
-PORT_COM    = "/dev/ttyUSB0"   # Port Arduino Mega sur Raspberry Pi
-BAUDRATE    = 9600
-SERVEUR_PHP = "http://100.68.68.68/check_uid.php"
-URL_PORTAIL = "http://100.68.68.68/check_uid.php"
-
-# Numéro GSM de l'admin/banc (pour tester)
-# Le numéro destinataire est récupéré depuis la BDD utilisateurs
-NUMERO_DEFAUT = "0745461370"
-
-# Intervalle minimum entre deux envois de vitesse (secondes)
+BAUDRATE                 = 9600
+SERVEUR_PHP              = "http://100.68.68.68/check_uid.php"
+URL_PORTAIL              = "http://100.68.68.68/check_uid.php"
+NUMERO_DEFAUT            = "0745461370"
 INTERVALLE_ENVOI_VITESSE = 2.0
+
+# ── Détection automatique du port Arduino ─────────────────
+def trouver_port_arduino():
+    ports = serial.tools.list_ports.comports()
+    for p in ports:
+        if any(x in p.description.lower() for x in ["arduino", "ch340", "ch341", "cp210", "usb serial", "uart"]):
+            print(f"[PORT] Arduino détecté sur {p.device} ({p.description})")
+            return p.device
+    if ports:
+        print(f"[PORT] Utilisation de {ports[0].device}")
+        return ports[0].device
+    raise Exception("Aucun port série trouvé. Vérifiez le branchement USB de l'Arduino.")
+
+PORT_COM = trouver_port_arduino()
 
 # ── Connexion Arduino ─────────────────────────────────────
 arduino = serial.Serial(PORT_COM, BAUDRATE, timeout=1)
 time.sleep(2)
-
 print("En attente de données Arduino...")
 
 dernier_envoi_vitesse = 0.0
@@ -34,28 +42,17 @@ def supprimer_accents(texte):
 
 
 def calculer_distance_km(uid):
-    """
-    Calcule la distance totale de la dernière session depuis la BDD.
-    Requête PHP : ?api=session&uid=<uid>
-    Retourne (distance_km, vitesse_max_kmh) ou (None, None) si indisponible.
-    """
     try:
-        url = f"{SERVEUR_PHP}?api=session&uid={uid}"
-        r = requests.get(url, timeout=5)
+        r = requests.get(f"{SERVEUR_PHP}?api=session&uid={uid}", timeout=5)
         data = r.json()
-        distance = data.get("distance_km")
-        vitesse  = data.get("vitesse_max_kmh")
-        return distance, vitesse
+        return data.get("distance_km"), data.get("vitesse_max_kmh")
     except Exception as e:
         print(f"[DIST] Erreur récupération session : {e}")
         return None, None
 
 
 def envoyer_sms_via_arduino(numero, message):
-    """
-    Envoie la commande SMS à l'Arduino qui la transmet au module A6.
-    Format : SMS:<numero>|<message>
-    """
+    """Envoie la commande SMS à l'Arduino qui la transmet au module A6."""
     message_ascii = supprimer_accents(message)
     commande = f"SMS:{numero}|{message_ascii}\n"
     arduino.write(commande.encode("utf-8"))
@@ -64,28 +61,19 @@ def envoyer_sms_via_arduino(numero, message):
 
 
 def construire_sms(prenom, uid, distance_km, vitesse_kmh, numero_tel):
-    """
-    Construit le message SMS de bienvenue.
-    Format : Bienvenue <prenom>, (<uid>), a la derniere course,
-             vous avez parcouru X km, a une vitesse de Y km/h...
-             cliquez ici pour en savoir plus : <lien>
-    """
     lien = f"{URL_PORTAIL}?uid={uid}"
-
     if distance_km is not None and vitesse_kmh is not None:
-        msg = (
+        return (
             f"Bienvenue {prenom}, ({uid}), "
             f"a la derniere course, vous avez parcouru {distance_km:.2f} km, "
             f"a une vitesse de {vitesse_kmh:.1f} km/h... "
             f"cliquez ici pour en savoir plus : {lien}"
         )
-    else:
-        msg = (
-            f"Bienvenue {prenom}, ({uid}), "
-            f"aucune course precedente trouvee. "
-            f"Connectez-vous sur le portail : {lien}"
-        )
-    return msg
+    return (
+        f"Bienvenue {prenom}, ({uid}), "
+        f"aucune course precedente trouvee. "
+        f"Connectez-vous sur le portail : {lien}"
+    )
 
 
 # ── Boucle principale ─────────────────────────────────────
@@ -99,10 +87,9 @@ while True:
             uid = line.replace("UID:", "").strip()
             print(f"[RFID] UID reçu : {uid}")
 
+            response = None
             try:
-                # Vérification accès + récupération infos utilisateur
-                url = f"{SERVEUR_PHP}?uid={uid}&api=1"
-                response = requests.get(url, timeout=5)
+                response = requests.get(f"{SERVEUR_PHP}?uid={uid}&api=1", timeout=5)
                 data = response.json()
 
                 statut  = data.get("statut", "KO")
@@ -116,11 +103,9 @@ while True:
                     arduino.write("ACCES AUTORISE\n".encode("utf-8"))
                     print("→ Accès autorisé envoyé à l'Arduino")
 
-                    # Récupération des données de la dernière session
                     distance_km, vitesse_max = calculer_distance_km(uid)
                     print(f"[SESSION] Distance : {distance_km} km | Vitesse max : {vitesse_max} km/h")
 
-                    # Construction et envoi du SMS
                     sms = construire_sms(prenom, uid, distance_km, vitesse_max, numero)
                     envoyer_sms_via_arduino(numero, sms)
 
@@ -142,7 +127,7 @@ while True:
             if maintenant - dernier_envoi_vitesse >= INTERVALLE_ENVOI_VITESSE:
                 dernier_envoi_vitesse = maintenant
 
-                data = line.replace("VITESSE:", "").strip()
+                data    = line.replace("VITESSE:", "").strip()
                 parties = data.split(";")
 
                 if len(parties) == 2:
@@ -151,8 +136,7 @@ while True:
                         trps = float(parties[1])
                         print(f"[VITESSE] {kmh:.1f} km/h  |  {trps:.3f} tr/s")
 
-                        url = f"{SERVEUR_PHP}?api=vitesse&kmh={kmh}&trps={trps}"
-                        r   = requests.get(url, timeout=5)
+                        r = requests.get(f"{SERVEUR_PHP}?api=vitesse&kmh={kmh}&trps={trps}", timeout=5)
                         print(f"[VITESSE] Serveur → {r.text.strip()}")
 
                     except ValueError:
